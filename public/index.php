@@ -7,7 +7,7 @@ require '../vendor/libs/functions.php';
 // Router::add ('posts/add', ['controller'=>'posts','action'=>'add']);
 // Router::add ('', ['controller'=>'main','action'=>'index']);
 Router::add('^$',['controller'=>'main','action'=>'index']);
-Router::add('(?<controller>[a-z-]+)/(?P<action>[a-z-]+)');
+Router::add('^(?<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
 
 debug(Router::getRoutes());
 if(Router::matchRoute($query)){
