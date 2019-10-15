@@ -43,15 +43,18 @@ class Router
 
     public static function dispatch($url){
         if(self::matchRoute($url)){
-            $controller = self::$route['contoller'];
+            $controller = self::upperCamelCase(self::$route['controller']);
             if (class_exists($controller)){
                 echo 'Ok';
             }else{
-                echo "контроллер  <b>$controller</b> не найден"
+                echo "контроллер  <b>$controller</b> не найден";
             }
         } else{
             http_response_code(404);
             include '404.html';
         }
+    }
+    protected static function upperCamelCase($name){
+        return str_replace(' ','',ucwords(str_replace('-',' ',$name)));
     }
 }
