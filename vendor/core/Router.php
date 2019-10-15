@@ -24,15 +24,31 @@ class Router
         foreach (self::$routes as $pattern => $route) {
             if (preg_match("#$pattern#i", $url, $matches)) {
                 debug($matches);
+                foreach($matches as $k=> $v){
+                    if(is_string($k)){
+                        $route[$k]=$v;
+                    }
+                }
+                debug($matches);
+                if(!isset($route['action'])){
+                    $route['action'] = 'index';
+                }
                 self::$route = $route;
+                debug($route);
                 return true;
             }
         }
         return false;
     }
+
     public static function dispatch($url){
         if(self::matchRoute($url)){
-            echo 'Ok';
+            $controller = self::$route['contoller'];
+            if (class_exists($controller)){
+                echo 'Ok';
+            }else{
+                echo "контроллер  <b>$controller</b> не найден"
+            }
         } else{
             http_response_code(404);
             include '404.html';

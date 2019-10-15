@@ -10,8 +10,9 @@ Router::add('^$',['controller'=>'main','action'=>'index']);
 Router::add('^(?<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
 
 debug(Router::getRoutes());
-if(Router::matchRoute($query)){
-    debug(Router::getRoute());
-} else{
-    echo '404';
-}
+// if(Router::matchRoute($query)){
+//     debug(Router::getRoute());
+// } else{
+//     echo '404';
+// }
+Router::dispatch($query);
